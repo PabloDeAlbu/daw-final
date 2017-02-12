@@ -5,5 +5,5 @@ La cartografía es provista por la API de GoogleMaps para javascript. También s
 Los recorridos se almacenan en una base de datos PostgreSQL 9.3 con la extensión Postgis 9.2. 
 Cada recorrido se representa con un nombre y un objeto MULTIPOINT.
 
-La aplicación esta configurada para utilizar una base de datos con nombre 'daw_user' y password '1234'.
+La aplicación esta configurada para utilizar una base de datos con nombre 'recorridos' con un usuario 'daw_user' y password '1234'.
 
