@@ -25,9 +25,7 @@
 			<table>
 			<thead>
 					<tr>
-					
 						<g:sortableColumn property="nombre" title="${message(code: 'recorrido.nombre.label', default: 'Nombre')}" />
-										
 					</tr>
 				</thead>
 				<tbody>
@@ -44,7 +42,13 @@
 				<g:paginate total="${recorridoInstanceCount ?: 0}" />
 			</div>
 		</div>
-		<g:render template="form"/>	
+		<div id="page-body" role="main">
+			<g:if test="${flash.message}">
+				<div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<h1>Recorridos</h1>
+			<g:render template="map"/>
+		</div>
 
 	</body>
 </html>

@@ -21,19 +21,36 @@ class RecorridoController {
     }
 
     def search(Recorrido recorridoInstance) {
-		if (params.origenX == null | params.destinoX == null ){
+		if (params.origenX == '' | params.destinoX == '' | params.origenX == null | params.destinoX == null ){
+			flash.message = "Agregar coordenadas de origen y destino"
 			redirect(uri: "/")
+			return
 		}
-		else {
 		def coordenadaOrigen = new com.vividsolutions.jts.geom.Coordinate(params.origenX.toDouble(),params.origenY.toDouble())
 		def coordenadaDestino = new com.vividsolutions.jts.geom.Coordinate(params.destinoX.toDouble(),params.destinoY.toDouble())
 		
 		def origen= factory.createPoint(coordenadaOrigen)
 		def destino = factory.createPoint(coordenadaDestino)
-		def recorridos = searchPointInRecorridos(origen, destino, params.distancia)
+		def distancia = params.distancia
+		def recorridos = searchPointInRecorridos(origen, destino, distancia)
 		
-        respond recorridos, view:'list'
+		if (recorridos.empty){
+			recorridos = searchPointInRecorridos(origen, destino, distancia * 2)
+			if (distancia < 100){
+				distancia = 200
+			}
+			else {
+				distancia = distancia * 2
+			}
+
+			flash.message = "No se han encontrado resultados para la distancia ingresada. Los siguientes resultados son los que mas acercan al criterio establecido con anterioridad"
+			if (recorridos.empty){
+			flash.message = "No se han encontrado resultados para la distancia ingresada"
+				redirect(uri: "/")
+				return
+			}
 		}
+        respond recorridos, view:'list'
     }
 
 	def show(Recorrido recorridoInstance) {
@@ -52,6 +69,13 @@ class RecorridoController {
 
     @Transactional
     def save(Recorrido recorrido) {
+
+		if (params.points == '' | params.nombre == '' | params.points == null | params.nombre == null ){
+			flash.message = "Agregar nombre del nuevo recorrido, coordenadas de origen y destino"
+			redirect(uri: "/recorrido/create")
+			return
+		}
+
 
         def recorridoInstance = new Recorrido(points: generateMultiPointsFromParam(params.points), nombre:params.nombre)
         if (recorridoInstance == null) {

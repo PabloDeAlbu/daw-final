@@ -1,3 +1,4 @@
+<div id="map" style="width:750px; height:500px"></div>
 
 
 <script>
@@ -11,7 +12,7 @@
 	function initMap() {
 		var geocoder = new google.maps.Geocoder();
 		map = new google.maps.Map(document.getElementById('map'), {
-			zoom : 16,
+			zoom : 15,
 			center : {
 				lat : -34.91957824,
 				lng : -57.95464039

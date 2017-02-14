@@ -1,4 +1,5 @@
-<div id="map"></div>
+<div id="map" style="width:750px; height:500px"></div>
+
 <script>
 	var poly;
 	var map;
@@ -22,7 +23,7 @@
 		});
 		poly.setMap(map);
 
-		map.addListener('rightclick', addLatLng);
+<%--		map.addListener('rightclick', addLatLng);--%>
 	}
 
 	function addLatLng(event) {
@@ -37,11 +38,5 @@
 		});
 		document.getElementById('points').value = str.slice(0, -1);
 	}
-
-
-	function showPath(e) {
-	    alert("I am an alert box!");
-	}
-	
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9_mf2ukOd6NpNP21ePA-8K9x_8H8er2A&callback=initMap"></script>

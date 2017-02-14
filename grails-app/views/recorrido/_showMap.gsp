@@ -14,7 +14,7 @@
 		});
 
 		map = new google.maps.Map(document.getElementById('map'), {
-			zoom : 16,
+			zoom : 14,
 			center : path[0]
 		});
 		poly = new google.maps.Polyline({
