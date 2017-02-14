@@ -17,7 +17,7 @@ class RecorridoController {
 	    
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Recorrido.list(params), model:[recorridoInstanceCount: Recorrido.count()]
+        respond Recorrido.list(params), view:"list" , model:[recorridoInstanceCount: Recorrido.count()]
     }
 
     def search(Recorrido recorridoInstance) {
@@ -35,15 +35,15 @@ class RecorridoController {
 		def recorridos = searchPointInRecorridos(origen, destino, distancia)
 		
 		if (recorridos.empty){
-			recorridos = searchPointInRecorridos(origen, destino, distancia * 2)
 			if (distancia < 100){
 				distancia = 200
 			}
 			else {
 				distancia = distancia * 2
 			}
+			recorridos = searchPointInRecorridos(origen, destino, distancia * 2)
 
-			flash.message = "No se han encontrado resultados para la distancia ingresada. Los siguientes resultados son los que mas acercan al criterio establecido con anterioridad"
+			flash.message = "No se han encontrado resultados que respeten estrictamente la distancia ingresada. Los siguientes resultados son los que mas acercan al criterio establecido con anterioridad"
 			if (recorridos.empty){
 			flash.message = "No se han encontrado resultados para la distancia ingresada"
 				redirect(uri: "/")

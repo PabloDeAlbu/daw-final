@@ -15,17 +15,24 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
-		<div id="status" role="complementary">
+		<div id="list-body" role="main">
+			<g:if test="${flash.message}">
+				<div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<h1>Recorridos</h1>
+			<p>Para agregar un destino o un origen, cliquear con el botón derecho en el mapa o buscar ubicación</p>			
 			<table>
 			<thead>
 					<tr>
 						<g:sortableColumn property="nombre" title="${message(code: 'recorrido.nombre.label', default: 'Nombre')}" />
+						<g:sortableColumn property="Acciones" title="Acciones" />
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${recorridoInstanceList}" status="i" var="recorridoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link action="show" id="${recorridoInstance.id}">${fieldValue(bean: recorridoInstance, field: "nombre")}</g:link></td>
+						<td><p>${fieldValue(bean: recorridoInstance, field: "nombre")}</p></td>
+						<td><g:link action="show" id="${recorridoInstance.id}">Ver </g:link><g:link action="edit" id="${recorridoInstance.id}">Editar</g:link></td>
 					</tr>
 				</g:each>
 				</tbody>
@@ -33,13 +40,7 @@
 				<div class="pagination">
 					<g:paginate total="${recorridoInstanceCount ?: 0}" />
 				</div>
-		</div>
-		<div id="page-body" role="main">
-			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<h1>Recorridos</h1>
-			<p>Para agregar un destino o un origen, cliquear con el botón derecho en el mapa o buscar ubicación</p>			
+
 		</div>
 			
 		</div>
