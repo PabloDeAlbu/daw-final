@@ -31,7 +31,7 @@ class RecorridoController {
 		
 		def origen= factory.createPoint(coordenadaOrigen)
 		def destino = factory.createPoint(coordenadaDestino)
-		def distancia = params.distancia
+		def distancia = params.distancia.toDouble()
 		def recorridos = searchPointInRecorridos(origen, destino, distancia)
 		
 		if (recorridos.empty){
@@ -187,10 +187,10 @@ class RecorridoController {
 			
 			recorrido.getPoints().geometries.each{ points ->
 				points.each { point ->
-					if (distancia.toDouble() - (point.distance(origen) * 100000) > 0){
+					if (distancia - (point.distance(origen) * 100000) > 0){
 						recorridos[index].getPoints().geometries.each{ pointsD ->
 							pointsD.each { pointD ->
-								if (distancia.toDouble() - (pointD.distance(destino) * 100000) > 0){
+								if (distancia - (pointD.distance(destino) * 100000) > 0){
 									if (!recorridosWithPoint.contains(recorridos[index])){
 										recorridosWithPoint << recorridos[index]
 									}
