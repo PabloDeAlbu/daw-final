@@ -20,7 +20,7 @@
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<h1>Recorridos</h1>
-			<p>Para agregar un destino o un origen, cliquear con el botón derecho en el mapa o buscar ubicación</p>			
+
 			<table>
 			<thead>
 					<tr>
