@@ -10,6 +10,7 @@ dataSource {
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
+//    jdbc.use_get_generated_keys = true
 //    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
     cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
     singleSession = true // configure OSIV singleSession mode
@@ -21,20 +22,19 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:postgresql://localhost:5432/recorridos"
+            url = "jdbc:postgresql://" + System.env.PG_PORT_5432_TCP_ADDR + "/recorridos"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:postgresql://localhost:5432/recorridos"
+            url = "jdbc:postgresql://" + System.env.PG_PORT_5432_TCP_ADDR + "/recorridos"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:postgresql://localhost:5432/recorridos"
-//			jndiName = "java:comp/env/recorridos"			
+            url = "jdbc:postgresql://" + System.env.PG_PORT_5432_TCP_ADDR + "/recorridos"
         }
     }
 }
