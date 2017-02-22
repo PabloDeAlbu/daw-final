@@ -33,15 +33,15 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td><p>${fieldValue(bean: recorridoInstance, field: "nombre")}</p></td>
 						<td>
-			<g:form action="show" id="${recorridoInstance.id}">
-					<g:actionSubmit value="Ver" />
-			</g:form>
-			<g:link action="edit" id="${recorridoInstance.id}"> 
-			   <input type="button" value="Editar" class="button"/> 
-			</g:link>
-			<g:form url="[resource:recorridoInstance, action:'delete']" method="DELETE">
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-			</g:form>
+							<g:link action="show" id="${recorridoInstance.id}"> 
+							   <input type="button" value="Ver" class="button"/>
+							</g:link>
+							<g:form url="[resource:recorridoInstance, action:'delete']" method="DELETE">
+									<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+							</g:form>
+							<g:link action="edit" id="${recorridoInstance.id}"> 
+							   <input type="button" value="Editar" class="button"/>
+							</g:link>
 						
 						</td>
 					</tr>
